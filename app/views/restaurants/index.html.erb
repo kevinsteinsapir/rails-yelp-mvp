@@ -1,0 +1,15 @@
+<h1 class="mb-4">Restaurants</h1>
+
+<div class="row">
+  <% @restaurants.each do |restaurant| %>
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+      <h5><%= link_to restaurant.name, restaurant_path(restaurant), class: "text-decoration-none" %></h5>
+      <p class="card-text"><strong>Category:</strong> <%= restaurant.category.capitalize %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= link_to "New Restaurant", new_restaurant_path, class: "btn btn-success"%>

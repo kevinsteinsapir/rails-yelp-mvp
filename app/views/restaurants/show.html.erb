@@ -1,0 +1,51 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h2 class = "card-title" ><%=@restaurant.name %></h2>
+    <p class="card-text"><%=@restaurant.address %></p>
+    <p class="card-text"><%=@restaurant.phone_number %></p>
+    <p class="card-text"><%=@restaurant.category %></p>
+  </div>
+</div>
+
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="card-title">Reviews</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @restaurant.reviews.each do |review| %>
+        <li class="list-group-item">
+          <p><%= review.content %></p>
+          <p><strong>Rating:</strong> <%= review.rating %></p>
+          <%= link_to "Delete", review_path(review), class: "btn btn-danger mt-2 mb-2", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+
+  <!-- Add Review -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="card-title">Add a Review</h3>
+    </div>
+    <div class="card-body">
+      <%= simple_form_for([@restaurant, @review]) do |f| %>
+        <div class="form-group">
+          <%= f.input :content, input_html: { class: 'form-control' } %>
+        </div>
+        <div class="form-group">
+          <%= f.input :rating, input_html: { class: 'form-control' } %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Submit Review", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<!-- Botón Home -->
+  <div class="text-center mt-4">
+    <%= link_to "Back to home", restaurants_path, class: "btn btn-secondary" %>
+  </div>
+</div>
